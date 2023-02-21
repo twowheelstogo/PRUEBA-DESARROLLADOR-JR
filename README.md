@@ -10,7 +10,7 @@ Esta prueba evalúa conocimientos de programación en base a una situación que 
 4.  Úbicate en el repositorio raíz del proyecto (Ubicación del proyecto forkeado en tu computadora).
 5.  Abrir desde del navegador el archivo index.html de este proyecto.
 ## Casos de usos
-Un banco financiero implementó el juego, Adivina tu número, la cual consiste en adivinar un número entre 1 al 100 durante 10 intentos. Así mismo para facilitar dicho juego se debe cumplir los siguientes requisitos:
+Adivina tu número, la cual consiste en adivinar un número entre 1 al 100 durante 10 intentos. Así mismo para facilitar dicho juego se debe cumplir los siguientes requisitos:
 * El número a adivinar debe pertenecer al conjunto de los enteros (e.g. 1, 2, 3...)
 * El número que ingresará el jugador debe pertenecer al conjunto de los enteros (e.g. 1, 2, 3...), en caso que no ingrese un número entero, debe mostrarse una alerta al usuario y no se debe incrementar un intento de prueba.
 * Sí el número que ingresó el jugador es mayor al número a adivinar, se debe mostrar el siguiente mensaje en color negro: "Incorrecto! El número es mayor!", en caso que sea menor, se debe mostrar: "Incorrecto! El número es menor!".
@@ -18,7 +18,7 @@ Un banco financiero implementó el juego, Adivina tu número, la cual consiste e
 * Si el usuario adivina el número antes de los 10 intentos, se debe mostrar el mensaje de color verde: "Felicitaciones! adivinaste el número!".
 ## Situación del proyecto.
 El desarrollador implementó toda la interfaz gráfica, y así mismo la lógica del juego en el archivo index.html (Con HTML, Javascript y CSS), sin embargo el equipo de desarrollo cometió el error de no testear dicho proyecto, y lo colocaron en los servidores de producción. Para su sorpresa, al momento de que el cliente lo vió... ¡NO FUNCIONABA NADA!
-Dado a esta experiencia, el banco financiero contrató a un tester para realizar las pruebas respectivas con la finalidad de que el proyecto funcione correctamente de acuerdo a los requerimientos dados.
+Dado a esta experiencia, se contrató a un tester para realizar las pruebas respectivas con la finalidad de que el proyecto funcione correctamente de acuerdo a los requerimientos dados.
 ## Plan de ataque
 Como tester debes solucionar este problema en tu repositorio de github, así mismo debe presentarle al equipo de desarrollo todos los errores que fuiste encontrando y corregiendo (i.e. Una breve descripción del error y su solución respectiva). Dentro del archivo test-strategy.md, igualmente el lider del equipo recomendó a cada tester, ver la consola del navegador de web para identificar más rápido los errores del proyecto.
 ## Entregables
