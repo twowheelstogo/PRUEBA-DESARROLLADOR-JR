@@ -16,8 +16,17 @@
         margin: 0 auto;
       }
       .lastResult {
-        color: white;
+        color: black;
         padding: 3px;
+      }
+      .lowOrHi{
+        color: white;
+      }
+      .guessSubmit{
+        border-radius: 15pc;
+        background-color: blue;
+        color: white;
+        width: 5pc;
       }
     </style>
   </head>
@@ -29,72 +38,93 @@
 
 <div class="form">
   <label for="guessField">Ingresa el número a adivinar: </label><input type="text" id="guessField" class="guessField">
-  <input type="submit" value="Ingresar el número aleatorio" class="guessSubmit">
+  <input type="submit" value="Adivinar" class="guessSubmit">
 </div>
 
 <div class="resultParas">
   <p class="guesses"></p>
   <p class="lastResult"></p>
   <p class="lowOrHi"></p>
+  <p class="intentos"></p>
 </div>
 
 </body>
 
 <script>
-  let randomNumber = Math.random() * 10;
-
-  const ATTEMPS = 5;
+  //se genera el numero aleatorio
+  let randomNumber = Math.round(Math.random() * 100+1);
+  console.log('Numero generado', randomNumber)
   const guesses = document.querySelector('.guesses');
   const lastResult = document.querySelector('.lastResult');
-  const lowOrHi = document.querySelector('lowOrHi');
+  const lowOrHi = document.querySelector('.lowOrHi');
   const guessSubmit = document.querySelector('.guessSubmit');
   const guessField = document.querySelector('.guessField');
+  const intentos = document.querySelector('.intentos');
 
-  let guessCount = 1;
+  var guessCount = 1;
   let resetButton;
 
-  function checkGuess() {
+  guessSubmit.addEventListener('click', validar);
 
-    let userGuess = guessField.value;
+  //Función que valida si el número ingresado es entero, de lo contrario muestra el mensaje de error.
+  function validar(){
+    let x = Number(guessField.value);
+    if(Number.isInteger(x)){
+      checkGuess();
+    }else{
+      lowOrHi.textContent = 'El número no debe ser decimal'
+    }
+  }
+  
+  function checkGuess() {
+    let userGuess = Number(guessField.value);
+    intentos.textContent = 'Intento: ' + guessCount;
+    //Se imprimen los numeros que ha ingresado el usuario
     if(guessCount === 1) {
       guesses.textContent = 'Número aleatorio anterior: ';
     }
-    guesses.textContent += userGuess + ' ';
-
+    guesses.textContent += userGuess + '  ';
+    
+    //Seccion donde se validan los intentos, si es mayor o menor o si lo adivino.
     if(userGuess === randomNumber) {
-      lastResult.textContent = '!!!Pérdistes!!!';
-      lastResult.style.backgroundColor = 'black';
+      lastResult.textContent = 'Felicitaciones! adivinaste el número!';
+      lastResult.style.backgroundColor = 'green';
       lowOrHi.textContent = '';
       setGameOver();
-    } else if(guessCount === ATTEMPS) {
-      lastResult.textContent = 'Felicitaciones! adivinaste el número!';
+    }else if(guessCount === 10) {
+      lastResult.textContent = '!!!Pérdiste!!!';
       lastResult.style.backgroundColor = 'red';
       setGameOver();
+      intentos.textContent = 'Intento: ' + guessCount;
     } else {
       lastResult.textContent = 'Incorrecto! ';
-      lastResult.style.backgroundColor = 'green';
+      lastResult.style.backgroundColor = 'yellow';
+      
       if(userGuess < randomNumber) {
         lowOrHi.textContent = 'El número es mayor!';
+        lowOrHi.style.backgroundColor = 'black';
       } else if(userGuess > randomNumber) {
         lowOrHi.textContent = 'El número es menor!';
+        lowOrHi.style.backgroundColor = 'black';
       }
     }
-
+    //Se aumenta el contador de intentos.
     guessCount++;
     guessField.value = '';
     guessField.focus();
   }
-  guessSubmit.addeventListener('click', checkGuess);
-
+  
+//Muestra el boton de comenzar un juego nuevo, luego de haber terminado los intentos o adivinar el numero
   function setGameOver() {
 	  guessField.disabled = true;
 	  guessSubmit.disabled = true;
 	  resetButton = document.createElement('button');
 	  resetButton.textContent = 'Comienza un nuevo juego';
 	  document.body.appendChild(resetButton);
-	  resetButton.addeventListener('click', resetGame);
+	  resetButton.addEventListener('click', resetGame);
   }
 
+//Funcion que se encarga de reiniciar el juego 
   function resetGame() {
 	  guessCount = 1;
 
@@ -110,8 +140,9 @@
 	  guessField.focus();
 
 	  lastResult.style.backgroundColor = 'white';
-
-	  randomNumber = Math.floor(Math.random()) + 1;
+    //se vuelve a generar el numero aleatorio al invocar la funcion de reset
+    randomNumber = Math.floor(Math.random() * 100) + 1;
+    console.log(randomNumber);
   }
 </script>
 </html>
